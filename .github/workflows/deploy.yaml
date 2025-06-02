@@ -51,3 +51,4 @@ jobs:
           sudo rm -rf *
           sudo cp -r /tmp/build/* /var/www/arduinonight.lk
           sudo systemctl restart nginx
+          clear
