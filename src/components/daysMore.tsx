@@ -26,7 +26,7 @@ export default function DaysMore() {
   if (!mounted) return null;
 
   return (
-    <div className="absolute top-[70%] left-1/2 -translate-x-1/2 z-30 flex justify-center items-center w-full pointer-events-none px-2 sm:px-0">
+    <div className="absolute top-[60%] left-1/2 -translate-x-1/2 z-30 flex justify-center items-center w-full pointer-events-none px-2 sm:px-0">
       <div className="relative group w-full max-w-[220px] sm:max-w-xs md:max-w-sm">
         {/* Animated background glow */}
         <div className="absolute -inset-0.5 bg-gradient-to-r from-fuchsia-400 via-violet-400 to-purple-400 rounded-2xl blur-md opacity-30 animate-pulse transition-all duration-1500" style={{ animationDelay: '0.5s' }}></div>
