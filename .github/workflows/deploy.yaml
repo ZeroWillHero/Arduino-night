@@ -47,8 +47,7 @@ jobs:
         port: 22
         script: |
           cd /var/www/arduinonight.lk
-          sudo mkdir -p backup && sudo cp -r * backup/ || true
+          sudo mkdir -p backup && sudo rsync -a --exclude backup ./ backup/
           sudo rm -rf *
           sudo cp -r /tmp/build/* /var/www/arduinonight.lk
           sudo systemctl restart nginx
-          clear
