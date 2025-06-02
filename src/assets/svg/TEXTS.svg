@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 233.19 69.64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-5);
+      }
+
+      .cls-5 {
+        fill: #ede6c8;
+      }
+
+      .cls-6 {
+        fill: #170b33;
+        opacity: .25;
+      }
+
+      .cls-7 {
+        fill: #442d7c;
+        font-family: ScreamZombie-Regular, 'ScreamZombie Regular';
+        font-size: 35.19px;
+      }
+
+      .cls-8 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="116.59" y1="0" x2="116.59" y2="65.37" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d577db" stop-opacity=".5"/>
+      <stop offset=".88" stop-color="#d577db" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="17.21" y1="21.67" x2="45.92" y2="21.67" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#311e56" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#311e56" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="4.68" y1="59.73" x2="158.03" y2="59.73" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-4" x1="155.12" y1="49.87" x2="233.19" y2="49.87" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-5" x1="173.86" y1="6.48" x2="226.86" y2="6.48" xlink:href="#linear-gradient-2"/>
+  </defs>
+  <g id="TEXTS">
+    <g>
+      <polygon class="cls-6" points="205.52 14.11 214.52 13.7 213.86 4.26 16.64 17.84 17.21 25.95 23.97 27.55 0 31.29 4.68 64.02 20.93 65.19 23.14 69.64 184.45 65.06 184.03 59.02 171.97 57.28 233.19 49.24 226.86 17.22 205.52 14.11"/>
+      <g>
+        <polygon class="cls-5" points="205.52 9.84 214.52 9.44 213.86 0 16.64 13.57 17.21 21.69 23.97 23.28 0 27.03 4.68 59.76 20.93 60.93 23.14 65.37 184.45 60.8 184.03 54.76 171.97 53.02 233.19 44.98 226.86 12.96 205.52 9.84"/>
+        <polygon class="cls-8" points="205.52 9.84 214.52 9.44 213.86 0 16.64 13.57 17.21 21.69 23.97 23.28 0 27.03 4.68 59.76 20.93 60.93 23.14 65.37 184.45 60.8 184.03 54.76 171.97 53.02 233.19 44.98 226.86 12.96 205.52 9.84"/>
+        <g>
+          <polygon class="cls-1" points="17.21 21.69 45.92 20.05 23.97 23.28 17.21 21.69"/>
+          <polygon class="cls-3" points="4.68 59.76 158.03 54.08 23.14 65.37 20.93 60.93 4.68 59.76"/>
+          <polygon class="cls-2" points="233.19 44.98 155.12 53.17 184.03 54.76 171.97 53.02 233.19 44.98"/>
+          <polygon class="cls-4" points="226.86 12.96 173.86 10.26 212.36 7.43 213.86 0 214.52 9.44 205.52 9.84 226.86 12.96"/>
+        </g>
+      </g>
+    </g>
+    <text class="cls-7" transform="translate(36.8 52.1) rotate(-3.87) scale(1.06 1) skewX(.55)"><tspan x="0" y="0">REGISTER </tspan></text>
+  </g>
+</svg>

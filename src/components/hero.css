@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'harryp';
+  src: url('./../assets/fonts/HARRYP__.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sinhala';
+  src: url('./../assets/fonts/FM_GANGA.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.hero-text{
+    font-family: 'harryp', sans-serif;
+}
+
+.sinhala {
+    font-family: 'sinhala', sans-serif;
+}
+
+.moon {
+    position: absolute;
+    width: 30vw;
+    height: 30vh;
+    left: 35%;
+    transform: translateX(-50%);
+    top: 30%;
+}
+
+.house-behind-trees{
+    position: absolute;
+    width: 50vw;
+    height: 60vh;
+    top: 20%;
+    left: 25%;
+    z-index: -1;
+}
+
+.house {
+    position: absolute;
+    width: 30vw;
+    height: 40vh;
+    top: 30%;
+    left: 35%;
+}
+
+@media (max-width: 600px) {
+    .grass-pink {
+        bottom: 30%;
+    }
+
+    .mid-trees{
+        bottom: 30%;
+    }
+
+    .grasses-house{
+        bottom: 30%;
+    }
+    
+    .house {
+        top: 30%;
+    }
+
+    .fence{
+        bottom: 30%;
+
+    }
+
+    .front-grass{
+        bottom: 30%;
+
+    }
+
+    .hero-text-size{
+        font-size: 0.8rem;
+        top:30%;
+    }
+
+    .hero-text-size-2{
+        font-size: 0.7rem;
+        top: 28%;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .grass-pink {
+        bottom: 20%;
+    }
+
+    .mid-trees {
+        bottom: 20%;
+    }
+
+    .grasses-house {
+        bottom: 20%;
+    }
+    
+    .house {
+        top: 24%;
+    }
+
+    .fence{
+        bottom: 30%;
+
+    }
+
+    .front-grass{
+        bottom: 20%;
+    }
+
+    .hero-text-size{
+        font-size: 0.8rem;
+        top:5%;
+    }
+
+    .hero-text-size-2{
+        font-size: 0.7rem;
+        top: 20%;
+    }
+}
