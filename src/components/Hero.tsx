@@ -196,10 +196,10 @@ export default function Hero() {
       {/* Register Popup */}
       {showRegister && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60" // <-- Highest z-index here
           onClick={handleOverlayClick}
         >
-          <div className="bg-[#18122b] rounded-2xl shadow-2xl p-6 md:p-10 max-w-lg w-full relative">
+          <div className="bg-[#18122b] rounded-2xl shadow-2xl p-6 md:p-10 max-w-lg w-full relative z-[100000]">
             <button
               className="absolute top-3 right-3 text-fuchsia-300 hover:text-fuchsia-500 text-2xl"
               onClick={() => setShowRegister(false)}
@@ -215,7 +215,7 @@ export default function Hero() {
       <h1
         className="hero-text absolute left-1/2 pt-2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-center"
         style={{
-          top: "18vh",
+          top: "10vh",
           fontSize: "clamp(2rem, 6vw, 4.5rem)",
           lineHeight: 1.1,
           zIndex: 100,
@@ -227,7 +227,7 @@ export default function Hero() {
       <h2
         className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-center mt-4"
         style={{
-          top: "32vh",
+          top: "20vh",
           fontSize: "clamp(1rem, 2.2vw, 2rem)",
           zIndex: 100,
         }}
