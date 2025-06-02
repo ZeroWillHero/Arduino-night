@@ -227,7 +227,7 @@ export default function Hero() {
       <h2
         className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-center mt-4"
         style={{
-          top: "18vh",
+          top: "20vh",
           fontSize: "clamp(0.8rem, 1.5vw, 1rem)",
           zIndex: 100,
         }}
