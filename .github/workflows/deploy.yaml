@@ -46,7 +46,7 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         port: 22
         script: |
-          cd /var/www/naturethank-frontend
+          cd /var/www/arduinonight.lk
           sudo mkdir -p backup && sudo cp -r * backup/ || true
           sudo rm -rf *
           sudo cp -r /tmp/build/* /var/www/arduinonight.lk
