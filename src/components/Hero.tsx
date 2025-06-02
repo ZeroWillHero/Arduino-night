@@ -186,7 +186,8 @@ export default function Hero() {
   }
 `}</style>
       <button
-        className="absolute cursor-pointer left-1/2 top-[86%] -translate-x-1/2 z-20 bg-[#a78bfa] hover:bg-[#7c3aed] text-white font-bold py-4 px-12 text-2xl rounded-full shadow-lg transition-colors flex items-center gap-3 glow-animate"
+        className="absolute cursor-pointer left-1/2 top-[86%] -translate-x-1/2 z-20 bg-[#a78bfa] hover:bg-[#7c3aed] text-white font-bold py-3 px-6 text-lg rounded-full shadow-lg transition-colors flex items-center gap-3 glow-animate
+          md:py-4 md:px-12 md:text-2xl"
         onClick={() => setShowRegister(true)}
       >
         Register Now
@@ -211,11 +212,26 @@ export default function Hero() {
         </div>
       )}
 
-      <h1 className="hero-text heero-text-size absolute left-1/2 top-30 pt-2 -translate-x-1/2 -translate-y-1/2 text-7xl text-white font-bold text-center">
+      <h1
+        className="hero-text absolute left-1/2 pt-2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-center"
+        style={{
+          top: "18vh",
+          fontSize: "clamp(2rem, 6vw, 4.5rem)",
+          lineHeight: 1.1,
+          zIndex: 100,
+        }}
+      >
         Arduino <br />Night
       </h1>
 
-      <h2 className="absolute hero-text-size-2 left-1/2 top-60 -translate-x-1/2 -translate-y-1/2 text-2xl text-white font-bold text-center mt-4">
+      <h2
+        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-center mt-4"
+        style={{
+          top: "32vh",
+          fontSize: "clamp(1rem, 2.2vw, 2rem)",
+          zIndex: 100,
+        }}
+      >
         <span className="hero-text">Practical</span>
         <span className="sinhala"> NS;sldjg meh 12 l udhd mka;sh</span>
       </h2>
