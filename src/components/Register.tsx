@@ -74,7 +74,7 @@ export default function Register() {
         formData.append("paymentSlip", form.paymentSlip);
       }
 
-      await apiCall(apiUrl, "POST", formData, {
+      await apiCall("https://arduinonight.com/api/users/register", "POST", formData, {
         "Content-Type": "multipart/form-data",
       });
 
