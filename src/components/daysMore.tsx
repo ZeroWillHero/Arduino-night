@@ -47,7 +47,7 @@ export default function DaysMore() {
             days
           </span>
           <span className='text-white font-bold text-[10px] sm:text-xs text-center'>
-            SYZYGY - GAMPAHA | JUNE 24TH | 6.00 P.M
+            SYZYGY - GAMPAHA | JUNE 24TH | 6.30 P.M
           </span>
         </div>
       </div>

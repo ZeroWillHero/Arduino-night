@@ -224,6 +224,22 @@ export default function Register() {
                 </div>
               </div>
             </div>
+
+            <div className="flex items-start mt-4 mb-2">
+        <input
+          type="checkbox"
+          id="agree"
+          required
+          className="mt-1 accent-fuchsia-600 w-5 h-5"
+        />
+        <label
+          htmlFor="agree"
+          className="ml-3 text-[13px] sm:text-sm text-purple-200 font-medium leading-snug"
+          style={{ userSelect: "text" }}
+        >
+          මෙම සම්මන්ත්‍රණයට මාගේ භාරකරුගේ ( මවගේ/පියාගේ) පූර්ණ දැනුවත්භාවය මත මා සහභාගී වන බවත්, මා හට නිධන්ගත රෝග නොමැති බවත් එසේ පවතින්නේනම්  එවැනි  රෝගී තත්වයක් යම් හෙයකින් හෝ ඇති වුවහොත් එහි වගකීම මා ගන්නා බවත් මෙයින් සනාථ කර සිටිමි.
+        </label>
+      </div>
             {preview && (
               <div className="mt-3">
                 <img src={preview} alt="Payment Slip Preview" className="max-h-32 rounded-md mx-auto" />
@@ -236,7 +252,29 @@ export default function Register() {
             disabled={isSubmitting}
             className="w-full py-3 rounded-xl bg-purple-600 text-white font-semibold hover:bg-purple-700 transition"
           >
-            {isSubmitting ? "Submitting..." : "Register"}
+            {isSubmitting ? (
+              <span className="flex items-center justify-center gap-2">
+              <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+                fill="none"
+                />
+                <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                />
+              </svg>
+              Submitting...
+              </span>
+            ) : (
+              "Register"
+            )}
           </button>
         </div>
       </div>
