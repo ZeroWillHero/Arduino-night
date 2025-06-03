@@ -195,24 +195,31 @@ export default function Hero() {
 
       {/* Register Popup */}
       {showRegister && (
-        <div
-          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70"
-          onClick={handleOverlayClick}
-          style={{ pointerEvents: "auto" }}
-        >
-          <div className="bg-[#18122b] rounded-2xl shadow-2xl p-6 md:p-10 max-w-lg w-full relative z-[100000]">
-            <button
-              className="absolute top-3 right-3 text-fuchsia-300 hover:text-fuchsia-500 text-2xl"
-              onClick={() => setShowRegister(false)}
-              aria-label="Close"
-              tabIndex={0}
-            >
-              &times;
-            </button>
-            <Register />
-          </div>
-        </div>
-      )}
+  <div
+    className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70"
+    onClick={handleOverlayClick}
+    style={{ pointerEvents: "auto" }}
+  >
+    <div className="bg-[#18122b] rounded-2xl shadow-2xl p-3 pt-12 md:p-10 max-w-lg w-full relative z-[100000]">
+      {/* Move close button to always be visible at the top, sticky for mobile */}
+      <button
+        className="fixed md:absolute top-3 right-3 text-fuchsia-300 hover:text-fuchsia-500 text-2xl z-[100001] bg-[#18122b] rounded-full p-2"
+        onClick={() => setShowRegister(false)}
+        aria-label="Close"
+        tabIndex={0}
+        style={{
+          // On mobile, make sure it's always visible
+          position: "fixed",
+          top: 16,
+          right: 16,
+        }}
+      >
+        &times;
+      </button>
+      <Register />
+    </div>
+  </div>
+)}
 
       <h1
         className="hero-text absolute left-1/2 pt-2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-center"
