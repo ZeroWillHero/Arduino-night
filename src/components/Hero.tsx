@@ -196,14 +196,16 @@ export default function Hero() {
       {/* Register Popup */}
       {showRegister && (
         <div
-          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60" // <-- Highest z-index here
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70"
           onClick={handleOverlayClick}
+          style={{ pointerEvents: "auto" }}
         >
           <div className="bg-[#18122b] rounded-2xl shadow-2xl p-6 md:p-10 max-w-lg w-full relative z-[100000]">
             <button
               className="absolute top-3 right-3 text-fuchsia-300 hover:text-fuchsia-500 text-2xl"
               onClick={() => setShowRegister(false)}
               aria-label="Close"
+              tabIndex={0}
             >
               &times;
             </button>
@@ -237,32 +239,6 @@ export default function Hero() {
       </h2>
 
       <DaysMore />
-
-      {/* <div className="flex flex-col items-center fixed left-1/2 bottom-6 -translate-x-1/2 z-50">
-        <span className="mb-2 text-white text-base font-medium">Scroll to Register</span>
-        <button
-          className="bg-transparent text-white p-4 rounded-full shadow-lg hover:bg-[#a78bfa] transition-colors flex items-center justify-center"
-          aria-label="Scroll to Register"
-          onClick={() => {
-            const section = document.getElementById("register");
-            if (section) {
-              section.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-7 h-7"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-
-      </div> */}
     </div>
   );
 }
