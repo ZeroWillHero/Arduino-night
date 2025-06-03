@@ -42,12 +42,20 @@ export default function Register() {
 
   const [preview, setPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
 
     if (name === "paymentSlip" && files && files[0]) {
       const file = files[0];
+      if (file.size > MAX_FILE_SIZE) {
+        toast.error("File size must be less than 5MB");
+        e.target.value = "";
+        return;
+      }
       setForm((prev) => ({ ...prev, paymentSlip: file }));
       setPreview(URL.createObjectURL(file));
     } else {
@@ -57,6 +65,10 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!agreed) {
+      toast.error("කරුණාකර එකඟතාවය තහවුරු කරන්න.");
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -87,6 +99,7 @@ export default function Register() {
         paymentSlip: null,
       });
       setPreview(null);
+      setAgreed(false);
     } catch (error: any) {
       toast.error(error.message || "Registration failed!");
     } finally {
@@ -201,7 +214,7 @@ export default function Register() {
               <input
                 type="file"
                 name="paymentSlip"
-                accept="image/*"
+                accept="image/*,application/pdf"
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                 onChange={handleChange}
                 required
@@ -217,27 +230,29 @@ export default function Register() {
                     <p className="text-purple-200 font-medium">
                       {form.paymentSlip ? form.paymentSlip.name : "Click to upload payment slip"}
                     </p>
-                    <p className="text-purple-400 text-sm mt-1">PNG, JPG, JPEG up to 5MB</p>
+                    <p className="text-purple-400 text-sm mt-1">PNG, JPG, JPEG, PDF up to 5MB</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="flex items-start mt-4 mb-2">
-        <input
-          type="checkbox"
-          id="agree"
-          required
-          className="mt-1 accent-fuchsia-600 w-5 h-5"
-        />
-        <label
-          htmlFor="agree"
-          className="ml-3 text-[13px] sm:text-sm text-purple-200 font-medium leading-snug"
-          style={{ userSelect: "text" }}
-        >
-          මෙම සම්මන්ත්‍රණයට මාගේ භාරකරුගේ ( මවගේ/පියාගේ) පූර්ණ දැනුවත්භාවය මත මා සහභාගී වන බවත්, මා හට නිධන්ගත රෝග නොමැති බවත් එසේ පවතින්නේනම්  එවැනි  රෝගී තත්වයක් යම් හෙයකින් හෝ ඇති වුවහොත් එහි වගකීම මා ගන්නා බවත් මෙයින් සනාථ කර සිටිමි.
-        </label>
-      </div>
+              <input
+                type="checkbox"
+                id="agree"
+                checked={agreed}
+                onChange={e => setAgreed(e.target.checked)}
+                required
+                className="mt-1 accent-fuchsia-600 w-5 h-5"
+              />
+              <label
+                htmlFor="agree"
+                className="ml-3 text-[13px] sm:text-sm text-purple-200 font-medium leading-snug"
+                style={{ userSelect: "text" }}
+              >
+                මෙම සම්මන්ත්‍රණයට මාගේ භාරකරුගේ ( මවගේ/පියාගේ) පූර්ණ දැනුවත්භාවය මත මා සහභාගී වන බවත්, මා හට නිධන්ගත රෝග නොමැති බවත් එසේ පවතින්නේනම්  එවැනි  රෝගී තත්වයක් යම් හෙයකින් හෝ ඇති වුවහොත් එහි වගකීම මා ගන්නා බවත් මෙයින් සනාථ කර සිටිමි.
+              </label>
+            </div>
             {preview && (
               <div className="mt-3">
                 <img src={preview} alt="Payment Slip Preview" className="max-h-32 rounded-md mx-auto" />
@@ -252,23 +267,23 @@ export default function Register() {
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">
-              <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-                fill="none"
-                />
-                <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                />
-              </svg>
-              Submitting...
+                <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    fill="none"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  />
+                </svg>
+                Submitting...
               </span>
             ) : (
               "Register"
