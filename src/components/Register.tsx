@@ -30,7 +30,7 @@ function InputField({ type, name, placeholder, icon, value, onChange }: InputFie
 }
 
 export default function Register() {
-  const SERVER = import.meta.env.VITE_SERVER_URL || "http://localhost:4000";
+  const SERVER = import.meta.env.VITE_SERVER_URL;
   const apiUrl = `${SERVER}/api/users/register`;
   const [form, setForm] = useState({
     firstname: "",
