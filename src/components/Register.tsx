@@ -289,6 +289,7 @@ export default function Register() {
               "Register"
             )}
           </button>
+          <p className="text-white text-sm"><span className="font-sans">Register </span>වීමේදී ගැටලුවක් ඇති වුවහොත් පහත දුරකරතන අංකය හා වට්සැප් මාර්ගයෙන් සම්බන්ද වන්න <span>0764251024</span></p>
         </div>
       </div>
     </form>
