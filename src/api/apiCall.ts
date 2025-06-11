@@ -4,13 +4,15 @@ const apiCall = async (
   url: string,
   method: Method = "GET",
   data?: any,
-  headers: Record<string, string> = {}
+  headers: Record<string, string> = {},
+  signal?: AbortSignal
 ): Promise<any> => {
   const config: AxiosRequestConfig = {
     url,
     method,
     headers,
     data,
+    signal,
   };
 
   // Remove data for GET requests
@@ -22,7 +24,6 @@ const apiCall = async (
     const response = await axios(config);
     return response.data;
   } catch (error: any) {
-    // Axios error handling
     if (error.response) {
       throw new Error(error.response.data?.message || error.response.statusText || "API call failed");
     }

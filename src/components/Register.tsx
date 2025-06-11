@@ -46,6 +46,21 @@ export default function Register() {
 
   const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
+  // Helper: Reset form
+  const resetForm = () => {
+    setForm({
+      firstname: "",
+      lastname: "",
+      email: "",
+      whatsappNumber: "",
+      school: "",
+      alYear: "",
+      paymentSlip: null,
+    });
+    setPreview(null);
+    setAgreed(false);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
 
@@ -57,7 +72,7 @@ export default function Register() {
         return;
       }
       setForm((prev) => ({ ...prev, paymentSlip: file }));
-      setPreview(URL.createObjectURL(file));
+      setPreview(file.type.startsWith("image/") ? URL.createObjectURL(file) : null);
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
@@ -69,10 +84,11 @@ export default function Register() {
       toast.error("කරුණාකර එකඟතාවය තහවුරු කරන්න.");
       return;
     }
+    if (isSubmitting) return; // Prevent double submit
+
     setIsSubmitting(true);
 
     try {
-      // Prepare form data for file upload
       const formData = new FormData();
       formData.append("firstname", form.firstname);
       formData.append("lastname", form.lastname);
@@ -84,24 +100,31 @@ export default function Register() {
         formData.append("paymentSlip", form.paymentSlip);
       }
 
-      await apiCall("https://arduinonight.com/api/users/register", "POST", formData, {
-        "Content-Type": "multipart/form-data",
-      });
+      // Set a timeout for the request (e.g., 20s)
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 20000);
 
+      await apiCall(
+        "https://arduinonight.com/api/users/register",
+        "POST",
+        formData,
+        { "Content-Type": "multipart/form-data" },
+        controller.signal
+      );
+
+      clearTimeout(timeout);
       toast.success("Registration submitted successfully!");
-      setForm({
-        firstname: "",
-        lastname: "",
-        email: "",
-        whatsappNumber: "",
-        school: "",
-        alYear: "",
-        paymentSlip: null,
-      });
-      setPreview(null);
-      setAgreed(false);
+      resetForm();
     } catch (error: any) {
-      toast.error(error.message || "Registration failed!");
+      if (error.name === "AbortError") {
+        toast.error("Request timed out. Please check your connection and try again.");
+      } else if (error?.response?.status === 413) {
+        toast.error("File is too large. Please upload a file less than 5MB.");
+      } else if (error?.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(error.message || "Registration failed! Please try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -113,6 +136,16 @@ export default function Register() {
       className="w-full max-w-lg mx-auto relative"
       style={{ maxHeight: "90vh", overflowY: "auto" }}
     >
+      {/* Fullscreen spinner overlay while submitting */}
+      {isSubmitting && (
+        <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/80">
+          <div className="flex flex-col items-center">
+            <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-fuchsia-400 border-solid mb-6"></div>
+            <span className="text-fuchsia-200 text-lg font-semibold tracking-wide">Submitting Registration...</span>
+          </div>
+        </div>
+      )}
+
       <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 rounded-3xl blur-xl opacity-20 animate-pulse"></div>
       <div className="relative bg-gradient-to-br from-slate-900/90 via-purple-900/80 to-slate-900/90 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 border border-purple-500/30">
         <div className="text-center mb-6">
