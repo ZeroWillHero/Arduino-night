@@ -7,37 +7,17 @@ import { ToastContainer } from 'react-toastify'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ToastContainer
-  position="top-right"
-  autoClose={4000}
+  position="top-center"
+  autoClose={5000}
   hideProgressBar={false}
-  newestOnTop
+  newestOnTop={true}
   closeOnClick
   rtl={false}
   pauseOnFocusLoss
   draggable
   pauseOnHover
   theme="dark"
-  limit={5}
-  toastStyle={{
-    background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',
-    backdropFilter: 'blur(16px)',
-    color: '#e5e7eb',
-    borderRadius: '16px',
-    border: '1px solid rgba(139, 92, 246, 0.2)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(139, 92, 246, 0.1)',
-    fontWeight: 500,
-    fontSize: '0.95rem',
-    lineHeight: '1.5',
-    fontFamily: '"Inter", "Segoe UI", Roboto, sans-serif',
-    minHeight: '60px',
-    padding: '16px 20px',
-  }}
-  style={{
-    width: '400px',
-    maxWidth: '90vw',
-  }}
-  toastClassName="modern-toast"
-  progressClassName="modern-toast-progress"      
+  style={{ zIndex: 9999999 }} // <-- This ensures it's always on top
 />
 
 {/* Custom CSS styles for additional customization */}
