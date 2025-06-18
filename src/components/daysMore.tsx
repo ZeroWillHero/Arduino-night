@@ -29,17 +29,13 @@ export default function DaysMore() {
     const fetchTotalUsers = async () => {
       try {
         const response = await apiCall(
-          `https://arduinonight.com/api/users/`,
+          `https://arduinonight.com/api/users/count`,
           "GET"
         );
         // Adjust according to your API response structure
         let totalUsers = 0;
-        if (typeof response.totalUsers === "number") {
-          totalUsers = response.totalUsers;
-        } else if (Array.isArray(response.users)) {
-          totalUsers = response.users.length;
-        } else if (Array.isArray(response)) {
-          totalUsers = response.length;
+        if (typeof response.count === "number") {
+          totalUsers = response.count;
         }
         setAvailableSeats(451 - totalUsers);
       } catch (error) {
