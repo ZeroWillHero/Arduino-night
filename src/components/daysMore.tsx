@@ -78,18 +78,18 @@ export default function DaysMore() {
           </span>
           <div className="mt-2">
             <span className="relative inline-block px-4 py-1 rounded-xl bg-gradient-to-r from-fuchsia-700 via-fuchsia-500 to-pink-500 shadow-lg">
-  <span className="absolute inset-0 rounded-xl blur-md opacity-40 bg-gradient-to-r from-fuchsia-400 via-pink-400 to-purple-400"></span>
-  <span className="relative text-white font-extrabold text-lg sm:text-2xl md:text-3xl tracking-wide drop-shadow-lg">
-    {availableSeats !== null ? (
-      <>
-        <span className="text-yellow-300 animate-pulse">{availableSeats}</span>
-        <span className="ml-2 text-white">Available Seats</span>
-      </>
-    ) : (
-      "Loading seats..."
-    )}
-  </span>
-</span>
+              <span className="absolute inset-0 rounded-xl blur-md opacity-40 bg-gradient-to-r from-fuchsia-400 via-pink-400 to-purple-400"></span>
+              <span className="relative text-white font-extrabold text-lg sm:text-2xl md:text-3xl tracking-wide drop-shadow-lg">
+                {availableSeats !== null ? (
+                  <>
+                    <span className="text-yellow-300 animate-pulse">{availableSeats}</span>
+                    <span className="ml-2 text-white">Available Seats</span>
+                  </>
+                ) : (
+                  "Loading seats..."
+                )}
+              </span>
+            </span>
           </div>
         </div>
       </div>
