@@ -49,7 +49,7 @@ export default function DaysMore() {
   if (!mounted) return null;
 
   return (
-    <div className="absolute top-[60%] left-1/2 -translate-x-1/2 z-30 flex flex-col justify-center items-center w-full pointer-events-none px-2 sm:px-0">
+    <div className="absolute top-[52%] left-1/2 -translate-x-1/2 z-30 flex flex-col justify-center items-center w-full pointer-events-none px-2 sm:px-0">
       <div className="relative group w-full max-w-[220px] sm:max-w-xs md:max-w-sm">
         {/* Animated background glow */}
         <div className="absolute -inset-0.5 bg-gradient-to-r from-fuchsia-400 via-violet-400 to-purple-400 rounded-2xl blur-md opacity-30 animate-pulse transition-all duration-1500" style={{ animationDelay: '0.5s' }}></div>
@@ -73,19 +73,25 @@ export default function DaysMore() {
             SYZYGY - GAMPAHA | JUNE 24TH | 6.30 P.M
           </span>
           <div className="mt-2">
-            <span className="relative inline-block px-4 py-1 rounded-xl bg-gradient-to-r from-fuchsia-700 via-fuchsia-500 to-pink-500 shadow-lg">
-              <span className="absolute inset-0 rounded-xl blur-md opacity-40 bg-gradient-to-r from-fuchsia-400 via-pink-400 to-purple-400"></span>
-              <span className="relative text-white font-extrabold text-lg sm:text-2xl md:text-3xl tracking-wide drop-shadow-lg">
-                {availableSeats !== null ? (
-                  <>
-                    <span className="text-yellow-300 animate-pulse">{availableSeats}</span>
-                    <span className="ml-2 text-white">Available Seats</span>
-                  </>
-                ) : (
-                  "Loading seats..."
-                )}
-              </span>
-            </span>
+            <span className="relative inline-flex flex-col items-center px-5 py-2 rounded-2xl bg-gradient-to-r from-fuchsia-700 via-fuchsia-500 to-pink-500 shadow-2xl overflow-hidden w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto my-4">
+  {/* Glowing blurred background */}
+  <span className="absolute inset-0 rounded-2xl blur-lg opacity-40 bg-gradient-to-r from-fuchsia-400 via-pink-400 to-purple-400 pointer-events-none"></span>
+  {/* Main content */}
+  <span className="relative flex flex-col items-center w-full z-10">
+    {availableSeats !== null ? (
+      <>
+        <span className="text-yellow-300 font-extrabold text-base sm:text-lg md:text-xl animate-pulse drop-shadow-lg">
+          {availableSeats}
+        </span>
+        <span className="text-white font-bold text-xs sm:text-sm md:text-base mt-1 tracking-wide text-center drop-shadow">
+          Available Seats
+        </span>
+      </>
+    ) : (
+      <span className="text-white font-semibold text-base sm:text-lg">Loading seats...</span>
+    )}
+  </span>
+</span>
           </div>
         </div>
       </div>
