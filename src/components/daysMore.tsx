@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import apiCall from "../api/apiCall";
 
 export default function DaysMore() {
   const [daysLeft, setDaysLeft] = useState(0);
+  const [availableSeats, setAvailableSeats] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -23,10 +25,35 @@ export default function DaysMore() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const fetchTotalUsers = async () => {
+      try {
+        const response = await apiCall(
+          `https://arduinonight.com/api/users/`,
+          "GET"
+        );
+        // Adjust according to your API response structure
+        let totalUsers = 0;
+        if (typeof response.totalUsers === "number") {
+          totalUsers = response.totalUsers;
+        } else if (Array.isArray(response.users)) {
+          totalUsers = response.users.length;
+        } else if (Array.isArray(response)) {
+          totalUsers = response.length;
+        }
+        setAvailableSeats(451 - totalUsers);
+      } catch (error) {
+        setAvailableSeats(null);
+      }
+    };
+
+    fetchTotalUsers();
+  }, []);
+
   if (!mounted) return null;
 
   return (
-    <div className="absolute top-[60%] left-1/2 -translate-x-1/2 z-30 flex justify-center items-center w-full pointer-events-none px-2 sm:px-0">
+    <div className="absolute top-[60%] left-1/2 -translate-x-1/2 z-30 flex flex-col justify-center items-center w-full pointer-events-none px-2 sm:px-0">
       <div className="relative group w-full max-w-[220px] sm:max-w-xs md:max-w-sm">
         {/* Animated background glow */}
         <div className="absolute -inset-0.5 bg-gradient-to-r from-fuchsia-400 via-violet-400 to-purple-400 rounded-2xl blur-md opacity-30 animate-pulse transition-all duration-1500" style={{ animationDelay: '0.5s' }}></div>
@@ -49,6 +76,21 @@ export default function DaysMore() {
           <span className='text-white font-bold text-[10px] sm:text-xs text-center'>
             SYZYGY - GAMPAHA | JUNE 24TH | 6.30 P.M
           </span>
+          <div className="mt-2">
+            <span className="relative inline-block px-4 py-1 rounded-xl bg-gradient-to-r from-fuchsia-700 via-fuchsia-500 to-pink-500 shadow-lg">
+  <span className="absolute inset-0 rounded-xl blur-md opacity-40 bg-gradient-to-r from-fuchsia-400 via-pink-400 to-purple-400"></span>
+  <span className="relative text-white font-extrabold text-lg sm:text-2xl md:text-3xl tracking-wide drop-shadow-lg">
+    {availableSeats !== null ? (
+      <>
+        <span className="text-yellow-300 animate-pulse">{availableSeats}</span>
+        <span className="ml-2 text-white">Available Seats</span>
+      </>
+    ) : (
+      "Loading seats..."
+    )}
+  </span>
+</span>
+          </div>
         </div>
       </div>
       <style>{`
@@ -60,6 +102,5 @@ export default function DaysMore() {
           animation: float 2s ease-in-out infinite;
         }
       `}</style>
-    </div>
-  );
+    </div>)
 }
