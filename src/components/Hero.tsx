@@ -13,12 +13,14 @@ import moon from '../assets/svg/Asset 13.svg';
 import sky from '../assets/svg/Asset 14.svg';
 
 import Register from './Register';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './hero.css';
+import apiCall from "../api/apiCall";
 import DaysMore from "./daysMore";
 
 export default function Hero() {
   const [showRegister, setShowRegister] = useState(false);
+  const [availableSeats, setAvailableSeats] = useState<number | null>(null);
 
   // Handler for clicking the overlay (outside the modal)
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -26,6 +28,74 @@ export default function Hero() {
       setShowRegister(false);
     }
   };
+
+  useEffect(() => {
+    const fetchTotalUsers = async () => {
+      try {
+        const response = await apiCall(
+          `https://arduinonight.com/api/users/count`,
+          "GET"
+        );
+        let totalUsers = 0;
+        if (typeof response.count === "number") {
+          totalUsers = response.count;
+        }
+        setAvailableSeats(451 - totalUsers);
+      } catch (error) {
+        setAvailableSeats(null);
+      }
+    };
+
+    fetchTotalUsers();
+  }, []);
+
+  // Registration Closed Seal
+  const RegistrationClosedSeal = () => (
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70 px-2">
+      <div className="flex flex-col items-center w-full max-w-md">
+        <span className="inline-flex items-center justify-center w-full">
+          <svg
+            width="100%"
+            height="auto"
+            viewBox="0 0 360 160"
+            className="max-w-xs sm:max-w-sm md:max-w-md w-full h-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ minWidth: 220, maxWidth: 360 }}
+          >
+            <defs>
+              <linearGradient id="bgGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#ff4e50" />
+                <stop offset="100%" stopColor="#c31432" />
+              </linearGradient>
+              <pattern id="texture" patternUnits="userSpaceOnUse" width="6" height="6">
+                <circle cx="3" cy="3" r="1" fill="rgba(255,255,255,0.08)" />
+              </pattern>
+            </defs>
+            <rect x="10" y="10" width="340" height="140" rx="20" ry="20"
+              fill="url(#bgGradient)" stroke="white" strokeWidth="6" />
+            <rect x="10" y="10" width="340" height="140" rx="20" ry="20"
+              fill="url(#texture)" />
+            <rect x="20" y="20" width="320" height="120" rx="15" ry="15"
+              fill="none" stroke="white" strokeDasharray="10,6" strokeWidth="2" />
+            <text x="180" y="70" textAnchor="middle" fontFamily="Impact, sans-serif"
+              fontSize="28" fill="white" fontWeight="bold" letterSpacing="2">
+              FULLY BOOKED !
+            </text>
+            <text x="180" y="110" textAnchor="middle" fontFamily="Georgia, serif"
+              fontSize="18" fill="white" letterSpacing="1">
+              Sorry We Are Closed
+            </text>
+          </svg>
+        </span>
+        <span
+          className="relative z-10 mt-4 text-white font-extrabold text-lg sm:text-xl md:text-2xl tracking-widest text-center"
+          style={{ letterSpacing: "0.15em" }}
+        >
+          REGISTRATION CLOSED
+        </span>
+      </div>
+    </div>
+  );
 
   return (
     <div className="inset-0 bg-[#180930] overflow-hidden z-0 h-screen">
@@ -185,41 +255,47 @@ export default function Hero() {
     animation: glow 2s ease-in-out infinite;
   }
 `}</style>
-      <button
-        className="absolute cursor-pointer left-1/2 top-[86%] -translate-x-1/2 z-20 bg-[#a78bfa] hover:bg-[#7c3aed] text-white font-bold py-3 px-6 text-lg rounded-full shadow-lg transition-colors flex items-center gap-3 glow-animate
-          md:py-4 md:px-12 md:text-2xl"
-        onClick={() => setShowRegister(true)}
-      >
-        Register Now
-      </button>
+
+      {/* Registration Closed Seal */}
+      {availableSeats !== null && availableSeats <= 0 && <RegistrationClosedSeal />}
+
+      {/* Register Button */}
+      {!(availableSeats !== null && availableSeats <= 0) && (
+        <button
+          className="absolute cursor-pointer left-1/2 top-[86%] -translate-x-1/2 z-20 bg-[#a78bfa] hover:bg-[#7c3aed] text-white font-bold py-3 px-6 text-lg rounded-full shadow-lg transition-colors flex items-center gap-3 glow-animate
+            md:py-4 md:px-12 md:text-2xl"
+          onClick={() => setShowRegister(true)}
+        >
+          Register Now
+        </button>
+      )}
 
       {/* Register Popup */}
-      {showRegister && (
-  <div
-    className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70"
-    onClick={handleOverlayClick}
-    style={{ pointerEvents: "auto" }}
-  >
-    <div className="bg-[#18122b] rounded-2xl shadow-2xl p-3 pt-12 md:p-10 max-w-lg w-full relative z-[100000]">
-      {/* Move close button to always be visible at the top, sticky for mobile */}
-      <button
-        className="fixed md:absolute top-3 right-3 text-fuchsia-300 hover:text-fuchsia-500 text-2xl z-[100001] bg-[#18122b] rounded-full p-2"
-        onClick={() => setShowRegister(false)}
-        aria-label="Close"
-        tabIndex={0}
-        style={{
-          // On mobile, make sure it's always visible
-          position: "fixed",
-          top: 16,
-          right: 16,
-        }}
-      >
-        &times;
-      </button>
-      <Register />
-    </div>
-  </div>
-)}
+      {showRegister && !(availableSeats !== null && availableSeats <= 0) && (
+        <div
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70"
+          onClick={handleOverlayClick}
+          style={{ pointerEvents: "auto" }}
+        >
+          <div className="bg-[#18122b] rounded-2xl shadow-2xl p-3 pt-12 md:p-10 max-w-lg w-full relative z-[100000]">
+            {/* Close button */}
+            <button
+              className="fixed md:absolute top-3 right-3 text-fuchsia-300 hover:text-fuchsia-500 text-2xl z-[100001] bg-[#18122b] rounded-full p-2"
+              onClick={() => setShowRegister(false)}
+              aria-label="Close"
+              tabIndex={0}
+              style={{
+                position: "fixed",
+                top: 16,
+                right: 16,
+              }}
+            >
+              &times;
+            </button>
+            <Register />
+          </div>
+        </div>
+      )}
 
       <h1
         className="hero-text absolute left-1/2 pt-2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-center"
@@ -244,7 +320,6 @@ export default function Hero() {
         <span className="hero-text">Practical</span>
         <span className="sinhala"> NS;sldjg meh 12 l udhd mka;sh</span>
       </h2>
-
       <DaysMore />
     </div>
   );
