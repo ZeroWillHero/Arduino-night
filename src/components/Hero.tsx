@@ -83,15 +83,9 @@ export default function Hero() {
             </text>
             <text x="180" y="110" textAnchor="middle" fontFamily="Georgia, serif"
               fontSize="18" fill="white" letterSpacing="1">
-              Sorry We Are Closed
+              REGISTRATION CLOSED
             </text>
           </svg>
-        </span>
-        <span
-          className="relative z-10 mt-4 text-white font-extrabold text-lg sm:text-xl md:text-2xl tracking-widest text-center"
-          style={{ letterSpacing: "0.15em" }}
-        >
-          REGISTRATION CLOSED
         </span>
       </div>
     </div>
