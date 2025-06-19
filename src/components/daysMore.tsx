@@ -81,7 +81,7 @@ export default function DaysMore() {
     {availableSeats !== null ? (
       <>
         <span className="text-yellow-300 font-extrabold text-base sm:text-lg md:text-xl animate-pulse drop-shadow-lg">
-          {availableSeats}
+            {Math.max(0, availableSeats)}
         </span>
         <span className="text-white font-bold text-xs sm:text-sm md:text-base mt-1 tracking-wide text-center drop-shadow">
           Available Seats
