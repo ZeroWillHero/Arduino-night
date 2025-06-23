@@ -37,7 +37,7 @@ export default function DaysMore() {
         if (typeof response.count === "number") {
           totalUsers = response.count;
         }
-        setAvailableSeats(4500 - totalUsers);
+        setAvailableSeats(453 - totalUsers);
       } catch (error) {
         setAvailableSeats(null);
       }
