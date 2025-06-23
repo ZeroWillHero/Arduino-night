@@ -40,7 +40,7 @@ export default function Hero() {
         if (typeof response.count === "number") {
           totalUsers = response.count;
         }
-        setAvailableSeats(451 - totalUsers);
+        setAvailableSeats(4500 - totalUsers);
       } catch (error) {
         setAvailableSeats(null);
       }
